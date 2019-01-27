@@ -17,4 +17,18 @@ router.post('/', (req, res) => {
         }
     )
 })
+
+router.post('/login',(req,res)=>{
+    let query = "select * from auth where username = :username and password = :password";
+    let parametres = {
+        username:req.body.username,
+        password:req.body.password
+    }
+    oracledb.getConnection(
+        config.connectionPool,
+        function(err,connection){
+            config.executionSqlQuery(err,connection,query,parametres,res,oracledb.OBJECT)
+        }
+    )
+})
 module.exports = router;
