@@ -4,6 +4,7 @@ const methodOverride = require('method-override');
 const app = express();
 const user = require('./routers/api/user');
 const auth = require('./routers/api/auth');
+const functions = require('./functions');
 
 app.use(bodyParser.json());
 app.use(methodOverride('_method'))
@@ -17,5 +18,12 @@ app.use(function (req, res, next) {
 app.use('/api/user',user);
 app.use('/api/auth',auth);
 
+cron.schedule("0 15 * * *", function () {
+    functions.generateCSV();
+    functions.generateGeoJSON();
+    functions.generateNewAPICSV();
+});
+
 const port = process.env.PORT || 52423;
 app.listen(port, () => console.log('server started at ' + port));
+
