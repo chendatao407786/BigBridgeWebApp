@@ -1,5 +1,5 @@
 let connectionPool = {
-    user: "c##big_bridge",
+    user: "c##bigbridge",
     password: "mbds",
     connectString: "localhost:1521/ORCLCDB.localdomain"
 }
