@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const config = require('../../config');
 const oracledb = require('oracledb');
-
 router.post('/', (req, res) => {
     let query = "INSERT into AUTH (username,email,password) VALUES (:username,:email,:password)";
     let parametres = {
@@ -17,7 +16,6 @@ router.post('/', (req, res) => {
         }
     )
 })
-
 router.post('/login',(req,res)=>{
     let query = "select * from auth where username = :username and password = :password";
     let parametres = {
@@ -56,7 +54,6 @@ router.post('/login',(req,res)=>{
                 }
             )
         }
-
     )
     // oracledb.getConnection(
     //     config.connectionPool,

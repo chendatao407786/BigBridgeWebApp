@@ -1,3 +1,4 @@
+let fitbitReqUrl='https://192.168.0.10:52423';
 let connectionPool = {
     user: "c##bigbridge",
     password: "mbds",
@@ -35,6 +36,7 @@ function doRelease(connection) {
         });
 }
 module.exports = {
+    fitbitReqUrl:fitbitReqUrl,
     connectionPool: connectionPool,
     doRelease: doRelease,
     executionSqlQuery: executionSqlQuery
