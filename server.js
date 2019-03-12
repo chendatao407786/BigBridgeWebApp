@@ -9,6 +9,7 @@ const app = express();
 const apphttps = express();
 const user = require('./routers/api/user');
 const auth = require('./routers/api/auth');
+const functions = require('./functions');
 
 
 
@@ -29,11 +30,20 @@ app.use('/api/auth',auth);
 const httpsPort = process.env.PORT || 52423;
 const httpPort = process.env.PORT || 8080;
 
-const httpsOptions = {
-    key: fs.readFileSync(path.join(__dirname,'ssl','key.pem')),
-    cert:fs.readFileSync(path.join(__dirname,'ssl','cert.pem')),
-    passphrase:'bigbridge'
-}
-http.createServer(app).listen(httpPort,() => console.log('http server started at ' + httpPort))
-https.createServer(httpsOptions,apphttps).listen(httpsPort,() => console.log('https server started at ' + httpsPort));
+// const httpsOptions = {
+//     key: fs.readFileSync(path.join(__dirname,'ssl','key.pem')),
+//     cert:fs.readFileSync(path.join(__dirname,'ssl','cert.pem')),
+//     passphrase:'bigbridge'
+// }
+// http.createServer(app).listen(httpPort,() => console.log('http server started at ' + httpPort))
+// https.createServer(httpsOptions,apphttps).listen(httpsPort,() => console.log('https server started at ' + httpsPort));
 // app.listen(httpPort, () => console.log('server started at ' + httpPort));
+cron.schedule("0 15 * * *", function () {
+    functions.generateCSV();
+    functions.generateGeoJSON();
+    functions.generateNewAPICSV();
+});
+
+const port = process.env.PORT || 52423;
+app.listen(port, () => console.log('server started at ' + port));
+
