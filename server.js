@@ -35,8 +35,8 @@ app.use('/api/auth', auth);
 app.use('/api/risk', risk);
 // apphttps.use('/api/fitbit/auth',fitbit);
 
-const httpsPort = process.env.PORT || 52423;
-const httpPort = process.env.PORT || 8080;
+// const httpsPort = process.env.PORT || 52423;
+// const httpPort = process.env.PORT || 8080;
 
 // const httpsOptions = {
 //     key: fs.readFileSync(path.join(__dirname,'ssl','key.pem')),
